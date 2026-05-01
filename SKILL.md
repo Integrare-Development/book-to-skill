@@ -87,6 +87,40 @@ Read `/tmp/book_skill_work/metadata.json` to understand what was extracted.
 
 ---
 
+## Step 2.5 — Pre-flight cost estimate
+
+Read `/tmp/book_skill_work/metadata.json` and present the user with an estimate **before doing any generation**:
+
+```
+📖 Book detected: <filename>
+📄 Pages: ~<N> | Words: ~<N> | Source tokens: ~<N>K
+
+💰 Estimated token cost (Full Conversion):
+   Input  (book reading + prompts): ~<N>K tokens
+   Output (skill files generated):  ~<N>K tokens
+   Total:                           ~<N>K tokens
+
+   Reference prices (as of 2025):
+   Claude Sonnet 4.5 → ~$<X> USD
+   Claude Haiku 4.5  → ~$<X> USD
+
+   ⏱  Estimated time: ~<N> minutes
+
+📁 Files to be generated:
+   SKILL.md + <N> chapter files + glossary + patterns + cheatsheet
+
+➡  Proceed with Full Conversion? (or type "analyze only" to preview first)
+```
+
+**How to estimate:**
+- Input tokens ≈ `estimated_tokens` from metadata × 1.3 (prompts overhead per chapter pass)
+- Output tokens ≈ chapters × 1,000 + 4,000 (SKILL.md) + 4,500 (glossary + patterns + cheatsheet)
+- Price: Sonnet input=$3/MTok output=$15/MTok — Haiku input=$0.80/MTok output=$4/MTok
+
+Wait for the user to confirm before proceeding. If they say "analyze only", switch to Mode 2.
+
+---
+
 ## Step 3 — Analyze book structure
 
 Read the first 8,000 characters of `/tmp/book_skill_work/full_text.txt` to identify:
@@ -312,14 +346,18 @@ Then report to the user:
 📄 Pages: ~<N> | Chapters: <N>
 
 Files generated:
-  SKILL.md         — core concepts + index   (~X tokens)
-  chapters/        — <N> chapter summaries   (~X tokens each)
-  glossary.md      — key terms
-  patterns.md      — techniques & patterns
-  cheatsheet.md    — quick reference
+  SKILL.md         — core frameworks + index   (~X tokens)
+  chapters/        — <N> chapter summaries     (~X tokens each, ~X total)
+  glossary.md      — key terms                 (~X tokens)
+  patterns.md      — techniques & patterns     (~X tokens)
+  cheatsheet.md    — quick reference           (~X tokens)
+  ─────────────────────────────────────────────────────
+  Total skill size: ~X tokens (loaded on-demand, not all at once)
+
+💡 Tip: run /cost in Claude Code to see the actual token usage for this session.
 
 Usage:
-  /<skill_name>                    → load core mental models
+  /<skill_name>                    → load core frameworks
   /<skill_name> <topic>            → find and explain a topic
   /<skill_name> ch<N>              → dive into a specific chapter
 ```
