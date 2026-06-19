@@ -11,8 +11,9 @@ edit_uri: ""
 
 theme:
   name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
   icon:
-    logo: material/book-open-variant
     repo: fontawesome/brands/github
   palette:
     - media: "(prefers-color-scheme: light)"

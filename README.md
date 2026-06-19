@@ -1,4 +1,8 @@
-<h1 align="center">📚 book-to-skill</h1>
+<p align="center">
+  <img src="docs/assets/logo.png" alt="book-to-skill logo" width="120">
+</p>
+
+<h1 align="center">book-to-skill</h1>
 
 <p align="center">
   <strong>Turn any technical book, document folder, or collection of sources into a unified agent skill — ready to study, reference, and use while you work in GitHub Copilot CLI, Amp, or Claude Code.</strong>
