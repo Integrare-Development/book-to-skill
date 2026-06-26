@@ -19,6 +19,14 @@
 [![Trending Repos](https://trending-repos.com/badge/virgiliojr94/book-to-skill.svg)](https://trending-repos.com/repositories/virgiliojr94/book-to-skill)
 
 <p align="center">
+  <a href="https://trendshift.io/repositories/27038" target="_blank"><img src="https://trendshift.io/api/badge/trendshift/repositories/27038/daily" alt="book-to-skill | Trendshift" width="250" height="55"></a>
+</p>
+
+<p align="center">
+  🏆 <strong>#10 Python Repository of the Day</strong> and <strong>#25 Repository of the Day</strong> on Trendshift (May 23, 2026)
+</p>
+
+<p align="center">
   <a href="#-why">Why</a> ·
   <a href="#-what-it-generates">What it generates</a> ·
   <a href="#-beyond-books">Beyond books</a> ·
