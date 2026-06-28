@@ -100,7 +100,9 @@ def install_python_packages(packages: list[str]) -> bool:
 
 
 def normalize_install_mode(argv: list[str]) -> str:
-    mode = os.environ.get("BOOK_SKILL_INSTALL_MISSING", "ask").lower()
+    # Integrare hardened fork: safe default is "no" (never auto-install a missing
+    # package without an explicit opt-in via --install-missing or the env var).
+    mode = os.environ.get("BOOK_SKILL_INSTALL_MISSING", "no").lower()
     if "--no-install-missing" in argv:
         return "no"
     if "--install-missing" in argv:

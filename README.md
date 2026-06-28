@@ -53,6 +53,23 @@
 
 ---
 
+## Integrare-Development — fork hardenizado (posture B)
+
+> Snapshot interno da Integrare Tech. Fork de [`virgiliojr94/book-to-skill`](https://github.com/virgiliojr94/book-to-skill) (MIT), adotado em **posture B — capacidade contida, sob demanda** (não é infraestrutura sempre-ligada). Origem: piloto WDI que converteu *Implementing Domain-Driven Design* (Vaughn Vernon) numa skill de referência (2026-06-28). O acoplamento é calibrado ao risco do upstream imaturo: captura-se a *capacidade*, sem assumir dívida de manutenção de always-on.
+
+### Hardening aplicado neste commit
+- **`.pyc` upstream removido** — `git rm` de `scripts/__pycache__/extract.cpython-313.pyc` (era commitado/tracked no upstream; `.gitignore` já cobre `*.pyc` + `__pycache__/`).
+- **Deps pinadas (caminho PDF validado)** — extra `pdf` do `pyproject.toml` fixado em `pypdf==6.14.2` + `pdfminer.six==20260107`; freeze completo, incluindo transitivas, em [`requirements-pinned.txt`](requirements-pinned.txt). Os demais extras (`epub`/`docx`/`rtf`/`technical`) ficam flutuantes até serem validados e pinados no primeiro uso (ver protocolo abaixo).
+- **`--no-install-missing` como default** — `book_to_skill/dependencies.py` passa a usar default `"no"` (antes `"ask"`): nenhuma instalação automática de pacote sem opt-in explícito (`--install-missing yes` ou env `BOOK_SKILL_INSTALL_MISSING`).
+
+### Protocolo de uso — summon-on-demand
+- **(a) Cada novo livro = uma mini-onda Oper** (WDI), que re-aplica: hardening do venv + **gate de custo (Step 2.5)** com estimativa de tokens/tempo/US$ **antes** de gerar + **spot-check de fidelidade** (amostrar frameworks do digest e conferir contra o livro). Sem rollout amplo, sem always-on.
+- **(b) Escala de geração (regra 2.13)** — a geração inline fatiada por capítulo serve para um livro; em escala (vários livros, ou um livro muito grande), migrar para **subagentes** (delegar leitura/geração por capítulo) para preservar o contexto do thread principal.
+- **(c) Appendix A / Event Sourcing** — ficou **fora** do digest IDDD por escopo. Decidir a inclusão numa eventual regeneração (custo extra vs. valor do tema).
+- **(d) Consentimento (condição AC3)** — no **primeiro uso real**, confirmar o **prompt de consentimento da 1ª gravação** no SKILLS_HOME numa sessão de **permissão normal** (não `acceptEdits`/`bypassPermissions`); o piloto rodou em modo permissivo e o prompt não materializou.
+
+---
+
 ## 🤔 Why
 
 You buy a great technical book. You read it once. Three months later you can't remember chapter 7 existed.

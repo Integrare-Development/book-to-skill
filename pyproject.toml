@@ -14,16 +14,19 @@ license = { text = "MIT" }
 book-to-skill = "book_to_skill.cli:main"
 
 [project.optional-dependencies]
+# Integrare-Development hardened fork: the validated PDF path is pinned to the
+# snapshot exercised by the IDDD pilot (2026-06-28). Other extras stay floating
+# until validated and pinned on first use (summon-on-demand protocol — see README).
 epub = ["ebooklib", "beautifulsoup4"]
-pdf = ["pypdf", "pdfminer.six"]
+pdf = ["pypdf==6.14.2", "pdfminer.six==20260107"]
 docx = ["python-docx"]
 rtf = ["striprtf"]
 technical = ["docling"]
 all = [
     "ebooklib",
     "beautifulsoup4",
-    "pypdf",
-    "pdfminer.six",
+    "pypdf==6.14.2",
+    "pdfminer.six==20260107",
     "python-docx",
     "striprtf",
     "docling"

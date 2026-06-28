@@ -1,0 +1,9 @@
+# Integrare-Development hardened fork — reproducible PDF extraction environment.
+# Full freeze (direct + transitive) validated in the IDDD pilot (2026-06-28),
+# Python 3.13. Install with: uv pip install -r requirements-pinned.txt
+cffi==2.0.0
+charset-normalizer==3.4.7
+cryptography==49.0.0
+pdfminer-six==20260107
+pycparser==3.0
+pypdf==6.14.2
